@@ -878,19 +878,19 @@ const featuredProject = projects[0];
   
   const allPages = document.querySelectorAll('.about, .skill, .project, .experience')
 
-  skillBtn.addEventListener('click', function(){
+  skillBtn?.addEventListener('click', function(){
     
-    abtPage.classList.add('rotate');
+    abtPage?.classList.add('rotate');
     for (const page of [allPages.item(1), allPages.item(2), allPages.item(3)]) {
       page.classList.remove('rotate');
     };
   });
-  abtBtn.addEventListener('click', function(){
+  abtBtn?.addEventListener('click', function(){
     for (const page of allPages) {
       page.classList.remove('rotate');
     };
   });
-  projectBtn.addEventListener('click', function(){
+  projectBtn?.addEventListener('click', function(){
     for (const page of [allPages.item(0), allPages.item(1)]) {
       page.classList.add('rotate');
     };
@@ -899,12 +899,12 @@ const featuredProject = projects[0];
     };
   });
 
-  expBtn.addEventListener('click', function(){
+  expBtn?.addEventListener('click', function(){
 
     for (const page of allPages) {
       page.classList.add('rotate');
     };
-    expPage.classList.remove('rotate');
+    expPage?.classList.remove('rotate');
     
   });
 </script>

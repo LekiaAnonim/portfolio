@@ -1,0 +1,910 @@
+---
+// Component Imports
+import MainHead from "../components/MainHead.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+import SkillBtn from "../components/SkillBtn.astro";
+import "/public/main.js";
+
+// Data Fetching: List all Markdown posts in the repo.
+const projects = await Astro.glob("./project/**/*.md");
+const featuredProject = projects[0];
+
+// SkillBtn.addEventListener('click', function(){
+//   abtPage.style.transform = `transform: rotateY(-180deg);`
+// })
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<html lang="en">
+  <head>
+    <MainHead
+      title="Lekia Prosper: Personal Site"
+      description="Lekia Prosper: Developer, Speaker, and Writer..."
+    />
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script> -->
+    <script>
+      
+    </script>
+    <style>
+      /* .wrapper {
+				margin-top: 2em;
+				margin-bottom: 2em;
+			} */
+
+      .introduction {
+		    width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+		/* overflow: hidden; */
+        /* display: flex; */
+        /* justify-content: space-around; */
+        /* position: absolute; */
+        /* overflow: hidden; */
+      }
+
+      @media (min-width: 750px) {
+        /* .hero {
+          height: 45vw;
+        } */
+      }
+      .intro {
+        width: 80%;
+      }
+      .skill-card{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 65px;
+        height: 200px;
+        overflow-y: scroll;
+        
+      }
+      .skill-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        
+      }
+      .skill-container p{
+        color: #ffffff;
+        font-size: 10px;
+      }
+      .skill-image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        position: relative;
+        /* transform: rotate(0deg); */
+        /* transition: transform linear 2s; */
+        animation-name: skillrotate;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
+      /* .skill-image:hover{
+        transform: rotate(0deg);
+        transition: transform linear 2s;
+        animation-name: skillrotate;
+        animation-duration: infinite;
+      } */
+      @keyframes skillrotate{
+        0%{transform: rotate(0deg);}
+        25%{transform: rotate(90deg);}
+        50%{transform: rotate(180deg);}
+        75%{transform: rotate(270deg);}
+        100%{transform: rotate(360deg);}
+      }
+      .skill-image img{
+        width: 70%;
+        height: 70%;
+      }
+      
+      .container {
+        max-width: 100%;
+        height: 1200px;
+        padding: 20px;
+        display: flex;
+        /* flex-wrap: wrap; */
+        /* align-items: center; */
+        justify-content: space-around;
+        background: rgba(0, 0, 0, 0.3); /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #4343436b,
+          rgba(0, 0, 0, 0.3)
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to right,
+          #4343436b,
+          rgba(0, 0, 0, 0.3)
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .photo {
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+		    min-width: 400px;
+        height: 550px;
+        margin-right: 100px;
+		    transform-style: preserve-3d;
+		    transform: rotate3d(1, 1, 1, 30deg);
+		    transition: transform ease-in-out 2s;
+        /* border-radius: 10px; */
+        /* border: solid #ffffff; */
+      }
+      .photo:hover{
+        transform: rotate3d(1, 1, 1, 0deg);
+      }
+      .avatar {
+        /* background-image: url("/public/assets/L.png"); */
+        /* background: rgba(255,255,255,1); */
+        background-repeat: no-repeat;
+        max-width: 100%;
+        max-height: 100%;
+        transform-origin: left;
+        transform-style: preserve-3d;
+        transition: transform ease-in-out 2s;
+        z-index: 10;
+        padding: 10px;
+        background: #000000; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #434343,
+          #000000
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #434343, #000000);
+        /* border: #ffffff solid; */
+      }
+      .avatar img {
+        max-width: 400px;
+        max-height: 500px;
+      }
+      .avatar:hover {
+        transform: rotateY(-180deg);
+      }
+      .rotate{
+        transform: rotateY(-180deg);
+      }
+      .profile-photo {
+        /* position: absolute; */
+        /* background-image: url("/public/assets/P.png"); */
+        /* background: #ffffff; */
+        background-repeat: no-repeat;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 10px;
+        transform: translateX(0%) translateY(-100%);
+        z-index: 1;
+        background: #000000; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #434343,
+          #000000
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #434343, #000000);
+        /* border: #ffffff solid; */
+      }
+      .profile-photo img {
+        max-width: 400px;
+        max-height: 450px;
+      }
+      .photo-comment small {
+        color: #ffffff;
+      }
+	  .page{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 75%;
+      /* overflow-y: scroll; */
+	  }
+    .about{
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transition: transform ease-in-out 2s;
+    }
+	  .skill{
+		  transform: translateX(0%) translateY(-100%);
+      transform-origin: left;
+      /* transform-style: preserve-3d; */
+      transition: transform ease-in-out 2s;
+	  }
+	  .project{
+		  transform: translateX(0%) translateY(-200%);
+      transform-origin: left;
+      /* transform-style: preserve-3d; */
+      transition: transform ease-in-out 2s;
+	  }
+	  .experience{
+		  transform: translateX(0%) translateY(-300%);
+      transform-origin: left;
+      /* transform-style: preserve-3d; */
+      transition: transform ease-in-out 3s;
+	  }
+    .skillbtn:focus, .abtbtn:focus, .projectbtn:focus, .expbtn:focus {
+      /* transform: rotateY(-180deg); */
+      background-color: #b24592;
+      color: #ffffff;
+    }
+      .overlay {
+        max-width: 100%;
+        height: 900px;
+		
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* justify-content: center; */
+        /* height: fit-content; */
+        border: solid;
+        border-radius: 20px;
+        border-color: #b24592;
+        border-color: -webkit-linear-gradient(
+          to right,
+          #f15f79,
+          #b24592
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        border-color: linear-gradient(
+          to right,
+          #f15f79,
+          #b24592
+        ); 
+        padding: 20px;
+		    background: #000000; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #434343,
+          #000000
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #434343, #000000);
+        
+      }
+
+      .title:hover {
+        color: #b24592;
+        color: -webkit-linear-gradient(to right, #f15f79, #b24592);
+        color: linear-gradient(to right, #f15f79, #b24592);
+      }
+
+	  .active{
+		background-color: #b24592;
+		color: #ffffff;
+	  }
+
+	  .nav-bar{
+      float: right;
+      margin-right: 50px;
+      margin-bottom: -40px;
+      z-index: 100;
+
+	  }
+    .project-container{
+      margin-top: 10px;
+      /* border: #ffffff solid; */
+      max-height: 257px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      overflow-y: scroll;
+    }
+    .project-card{
+      width: 300px;
+      max-height: 100%;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 1);
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .project-card h5{
+      margin: 0 0 5px 0;
+      font-size: 18px;
+    }
+    .project-image{
+      max-width: 100%;
+      max-height: 130px;
+    }
+    .project-card p{
+      font-size: 9px;
+      color: #ffffff;
+      padding: 0;
+      margin: 5px;
+    }
+    .proj-source{
+      margin-top: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .proj-source img{
+      margin-top: 4px;
+      width: 20px;
+      height: 20px;
+    }
+    .proj-source p{
+      color: #000000;
+      font-weight: 700;
+    }
+    .project-info{
+      background-color: #202020;
+      padding: 5px;
+    }
+
+    a{
+      text-decoration: none;
+    }
+    .articles-page{
+      margin-top: 5.3px;
+      height: 260px;
+      overflow-y: scroll;
+    }
+    .articles-page a:hover{
+      color: #f15f79;
+    }
+    .articles-page a,li,ol{
+      color: #ffffff;
+      text-transform: uppercase;
+      /* text-transform: capitalize; */
+    }
+    .articles-page li{
+      margin-bottom: 10px;
+      color: #f0f0f0;
+    }
+
+    
+    @media (min-width: 750px) {
+      .overlay {
+        padding-left: 2rem;
+      }
+  
+    }
+
+	  @media (max-width: 900px) {
+        
+        .container {
+          flex-wrap: wrap;
+		      height: 1200px;
+          padding: 0 0 0 0;
+          margin: 0;
+          justify-content: center;
+          align-items: center ;
+        }
+        
+        .page{
+          padding-left: 0;
+          margin-left: 0;
+        }
+        .overlay{
+          width: 100%;
+          margin-left: 0;
+        }
+        .intro{
+          width: 100%;
+        }
+        
+        .nav-bar{
+          float: none;
+          margin-left: 60px;
+          margin-top: 540px;
+          position: absolute;
+          /* bottom: 0; */
+        }
+        .project-container{
+          max-height: 100%;
+        }
+        .photo {
+          width: 100%;
+          min-width: 400px;
+          height: 550px;
+        }
+        .skill-card{
+          height: 100%;
+        }
+        .articles-page{
+          height: 100%;
+        }
+    }
+
+      .title {
+        font-weight: 900;
+        font-size: var(--f-u6);
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+        color: #ffffff;
+      }
+
+      @media (min-width: 750px) {
+        .title {
+          font-size: var(--f-u12);
+        }
+      }
+
+      .grid {
+        display: grid;
+        grid-gap: 2rem;
+      }
+
+      @media (min-width: 1200px) {
+        .grid {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+
+      .sectionTitle {
+        font-weight: 700;
+        font-size: var(--f-u8);
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      .roles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        font-size: var(--f-d1);
+      }
+
+      .role {
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        font-weight: 900;
+        color: var(--t-bg);
+        background-color: var(--t-fg);
+        padding: 0.25em 0.5em;
+        z-index: 2;
+      }
+
+      @media (min-width: 750px) {
+        .role {
+          font-size: var(--f-u3);
+        }
+      }
+
+      .role:nth-of-type(1) .invert {
+        background-color: var(--c-pink);
+      }
+
+      .role:nth-of-type(2) .invert {
+        background-color: var(--c-blue);
+      }
+
+      .role:nth-of-type(3) .invert {
+        background-color: var(--c-green);
+      }
+
+      .role:hover .invert {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      }
+
+      .invert {
+        position: absolute;
+        color: var(--t-fg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        clip-path: polygon(0% 100%, 100% 100%, 100% 200%, 0% 200%);
+        transition: clip-path cubic-bezier(0.4, 0, 0.5, 1) 150ms;
+      }
+
+      .desc {
+        font-size: var(--f-u1);
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+		  line-height: 25px;
+        color: #ffffff;
+      }
+      .desc span{
+      background-color: #cc60ac;
+      border-radius: 5px;
+      padding: 0;
+      }
+      .subtitle {
+        display: block;
+        font-weight: 400;
+        font-size: var(--f-d6);
+        letter-spacing: -0.0625em;
+      }
+
+      .bio {
+        line-height: 2;
+        margin-bottom: 2rem;
+      }
+
+      .bio > span:first-of-type {
+        line-height: 1;
+        margin-bottom: 0.5em;
+        display: block;
+        font-weight: 700;
+        font-size: var(--f-u4);
+      }
+
+      .buttonContainer {
+        text-align: center;
+        margin-top: 2em;
+      }
+    </style>
+    
+  </head>
+  <body>
+    
+    <Nav />
+    <div class="introduction">
+      <div class="nav-bar">
+        <button class="abtbtn">About</button>
+        <button class="skillbtn">Skills</button>
+        <button class="projectbtn">Projects</button>
+        <button class="expbtn">Articles</button>
+      </div>
+      <div class="container">
+        <div class="photo">
+          <div class="avatar">
+            <img src="/public/assets/L.png" alt="avatar" srcset=""/>
+            <div class="photo-comment">
+            <small>Are you curious to know what I look like? #Hoverme</small>
+            </div>
+          </div>
+          <div class="profile-photo">
+            <img src="/public/assets/P.png" alt="profile photo" srcset="" />
+            <div class="photo-comment">
+            <small>Hi!, I'm Lekia Prosper. You are welcome to my page.</small>
+            </div>
+          </div>
+        </div>
+        <div class="page">
+          <div class="overlay about" id="about" style="z-index: 20;">
+            <h1 class="title">
+              <small class="subtitle">@</small>Lekia Prosper
+            </h1>
+            <div class="roles">
+              <span class="role"
+              >👩‍💻 Developer <span class="invert">👩‍💻 Developer</span>
+              </span>
+              <span class="role"
+              >🎤 Engineer <span class="invert">🎤 Engineer</span>
+              </span>
+              <span class="role"
+              >✏️ Writer <span class="invert">✏️ Writer</span>
+              </span>
+            </div>
+            <div class="intro">
+              <p class="desc">
+              What you will find here, is my exploration and exploitations,
+              which revolves around the quest to finding solutions. It will have
+              a touch <strike>or mix</strike> of my profession as a <span>Chemical and
+              Petroleum Engineer</span>, and the push to find expression through programming.
+              </p>
+              <p class="desc">
+              You will find here some of the skills garnered in the process as
+              an experience in <span>data science</span>, <span>desktop application development</span>,
+              and <span>web development</span>.
+              </p>
+              <p class="desc">
+              And lastly, a sprinkle of some of my <span>technical articles</span>.
+              </p>
+            </div>
+          </div>
+          <div class="overlay behind skill" id="skill" style="z-index: 18;">
+            <h1 class="title">
+              <small class="subtitle">@</small>Skills
+            </h1>
+            <div class="roles">
+              <span class="role"
+              >👩‍💻 Developer <span class="invert">👩‍💻 Developer</span>
+              </span>
+              <span class="role"
+              >🎤 Engineer <span class="invert">🎤 Engineer</span>
+              </span>
+              <span class="role"
+              >✏️ Writer <span class="invert">✏️ Writer</span>
+              </span>
+            </div>
+            <div class="intro skill-card">
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/python_96px.png" alt="">
+                </div>
+                <p>Python</p>
+              </div>
+            
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/django_96px.png" alt="">
+                </div>
+                <p>Django</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/javascript_96px.png" alt="">
+                </div>
+                <p>JavaScript</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/html_5_96px.png" alt="">
+                </div>
+                <p>HTML</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/css3_96px.png" alt="">
+                </div>
+                <p>CSS</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/google-cloud-seeklogo.com.svg" alt="">
+                </div>
+                <p>GCP</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/google-cloud-run-seeklogo.com.svg" alt="">
+                </div>
+                <p>CloudRun</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/docker_96px.png" alt="">
+                </div>
+                <p>Docker</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/kubernetes_96px.png" alt="">
+                </div>
+                <p>Kubernetes</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/plotly-dash.png" alt="">
+                </div>
+                <p>Dash</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/tk.png" alt="">
+                </div>
+                <p>Tkinter</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/beeware-150.png" alt="">
+                </div>
+                <p>Beeware</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/toga.png" alt="">
+                </div>
+                <p>Toga</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/heroku_96px.png" alt="">
+                </div>
+                <p>Heroku</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/astro.svg" alt="">
+                </div>
+                <p>Astro</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/opm_logo_compact.png" alt="">
+                </div>
+                <p><abbr title="Open Porous Media: Resevoir Simulation">OPM</abbr></p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/RISK_logo_vertical.png" alt="">
+                </div>
+                <p>@Risk</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/microsoft_excel_2019_96px.png" alt="">
+                </div>
+                <p>Excel</p>
+              </div>
+              <div class="skill-container">
+                <div class="skill-image">
+                  <img src="/public/assets/git_96px.png" alt="">
+                </div>
+                <p>Git</p>
+              </div>
+            </div>
+          </div>
+          <div class="overlay behind project" id="project" style="z-index: 15;">
+            <h1 class="title">
+              <small class="subtitle">@</small>Projects
+            </h1>
+            <div class="roles">
+              <span class="role">👩‍💻 Developer <span class="invert">👩‍💻 Developer</span></span>
+              <span class="role">🎤 Engineer <span class="invert">🎤 Engineer</span></span>
+              <span class="role">✏️ Writer <span class="invert">✏️ Writer</span></span>
+            </div>
+            <div class="intro project-container">
+              <div class="project-card">
+                <h5 class="project-title">Banking App</h5>
+                <img class="project-image" src="/public/assets/bank-production.up.railway.app_customer-portal.png" alt="">
+                <div class="project-info">
+                  <p class="project-stack">Language: Python, Django</p>
+                  <p class="project-desc">Description: A full banking app for making bank operations such as creating customers, accounts, making, payments</p>
+                </div>
+                <div class="proj-source">
+                  <p class="project-source">source:</p>
+                  <a href="https://github.com/LekiaAnonim/bank"><img src="/public/assets/external_link_48px.png" alt=""></a>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5 class="project-title">Biblica</h5>
+                <img class="project-image" src="/public/assets/biblica.png" alt="">
+                <div class="project-info">
+                  <p class="project-stack">Language: JavaScript</p>
+                  <p class="project-desc">Description: A browser extension for getting Bible passages by simply selecting a reference or keyword.</p>
+                  
+                </div>
+                <div class="proj-source">
+                  <p class="project-source">source:</p>
+                  <a href="https://github.com/LekiaAnonim/Biblica"><img src="/public/assets/external_link_48px.png" alt=""></a>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5 class="project-title">Dynamogas, Transaction Manager</h5>
+                <img class="project-image" src="/public/assets/dynamogas.PNG" alt="">
+                <div class="project-info">
+                  <p class="project-stack">Language: Python, Beeware, Toga, Tkinter, Dash</p>
+                  <p class="project-desc">Description: An application for managing gas sale, making entries, and querying database.</p>
+                  
+                </div>
+                <div class="proj-source">
+                  <p class="project-source">source:</p>
+                  <a href="https://github.com/LekiaAnonim/dynamogas"><img src="/public/assets/external_link_48px.png" alt=""></a>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5 class="project-title">Jelectronics</h5>
+                <img class="project-image" src="/public/assets/jelectronics.png" alt="">
+                <div class="project-info">
+                  <p class="project-stack">Language: Python, Django</p>
+                  <p class="project-desc">Description: A fully functional E-commerce website for selling electronic production.</p>
+                  
+                </div>
+                <div class="proj-source">
+                  <p class="project-source">source:</p>
+                  <a href="https://github.com/LekiaAnonim/jelectronics"><img src="/public/assets/external_link_48px.png" alt=""></a>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5 class="project-title">StratV</h5>
+                <img class="project-image" src="/public/assets/stratv.ico" alt="">
+                <div class="project-info">
+                  <p class="project-stack">Language: Python, Tkinter</p>
+                  <p class="project-desc">Description: A computer implementation of the Dykstra-Parson method applied to discrete and continuous solutions.</p>
+                  
+                </div>
+                <div class="proj-source">
+                  <p class="project-source">source:</p>
+                  <a href="https://github.com/LekiaAnonim/StratV_App"><img src="/public/assets/external_link_48px.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="overlay behind experience" id="experience" style="z-index: 12;">
+            <h1 class="title">
+              <small class="subtitle">@</small>Articles
+            </h1>
+            <div class="roles">
+              <span class="role"
+              >👩‍💻 Developer <span class="invert">👩‍💻 Developer</span>
+              </span>
+              <span class="role"
+              >🎤 Engineer <span class="invert">🎤 Engineer</span>
+              </span>
+              <span class="role"
+              >✏️ Writer <span class="invert">✏️ Writer</span>
+              </span>
+            </div>
+            <div class="intro articles-page">
+              <ol>
+                <li><a href="https://lekiaprosper.medium.com/deploying-django-app-to-google-cloud-using-cloud-run-eef81aa73c5e">DEPLOYING DJANGO APP TO GOOGLE CLOUD USING CLOUD RUN</a></li>
+                <li><a href="https://lekiaprosper.medium.com/fractional-flow-curve-with-tangents-and-fractional-flow-derivative-with-python-9653ce8e1ae0">Fractional Flow Curve with Tangents and Fractional Flow Derivative with Python</a></li>
+                <li><a href="https://lekiaprosper.medium.com/fresh-perspectives-towards-birthing-a-thriving-oil-and-gas-industry-7bb1304825fd">FRESH PERSPECTIVES TOWARDS BIRTHING A THRIVING OIL AND GAS INDUSTRY.</a></li>
+                <li><a href="https://lekiaprosper.medium.com/gleanings-of-petroleum-production-a-laymans-approach-6c978b8de89e">GLEANINGS OF PETROLEUM PRODUCTION: A LAYMAN’S APPROACH</a></li>
+                <li><a href="https://lekiaprosper.medium.com/petroleum-engineering-my-concern-a14e889931c8">PETROLEUM ENGINEERING: MY CONCERN</a></li>
+                <li><a href="https://koretgist.com/all-you-need-to-know-about-creating-your-nft">ALL YOU NEED TO KNOW ABOUT CREATING AND SELLING YOUR NFT ON BINANCE AND OPENSEA NFT MARKET PLACE</a></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+    </div>
+    
+    <!-- <main class="wrapper">
+			<div class="grid">
+				<div class="section">
+					<h3 class="sectionTitle">Selected Work</h3>
+					<PortfolioPreview project={featuredProject} />
+					<div class="buttonContainer">
+						<a href="/products/" class="button">View All</a>
+					</div>
+				</div>
+				<div class="section">
+					<h3 class="sectionTitle">About me</h3>
+					<p class="bio">
+						<span>Hello!</span> I’m Jeanine, and this is my website. It was made using{' '}
+						<a href="https://github.com/withastro/astro" target="_blank" rel="nofollow"> Astro</a>,
+						a new way to build static sites. This is just an example template for you to modify.
+					</p>
+					<p>
+						<a href="/about">Read more</a>
+					</p>
+				</div>
+			</div>
+		</main> -->
+    <Footer />
+    
+  </body>
+</html>
+<script>
+      
+  const skillBtn = document.querySelector('.skillbtn');
+  const projectBtn = document.querySelector('.projectbtn');
+  const expBtn = document.querySelector('.expbtn');
+  const abtBtn = document.querySelector('.abtbtn');
+
+  const skillPage = document.querySelector('.skill');
+  const projectPage = document.querySelector('.project');
+  const expPage = document.querySelector('.experience');
+  const abtPage = document.querySelector('#about');
+  
+  const allPages = document.querySelectorAll('.about, .skill, .project, .experience')
+
+  skillBtn.addEventListener('click', function(){
+    
+    abtPage.classList.add('rotate');
+    for (const page of [allPages.item(1), allPages.item(2), allPages.item(3)]) {
+      page.classList.remove('rotate');
+    };
+  });
+  abtBtn.addEventListener('click', function(){
+    for (const page of allPages) {
+      page.classList.remove('rotate');
+    };
+  });
+  projectBtn.addEventListener('click', function(){
+    for (const page of [allPages.item(0), allPages.item(1)]) {
+      page.classList.add('rotate');
+    };
+    for (const page of [allPages.item(2), allPages.item(3)]) {
+      page.classList.remove('rotate');
+    };
+  });
+
+  expBtn.addEventListener('click', function(){
+
+    for (const page of allPages) {
+      page.classList.add('rotate');
+    };
+    expPage.classList.remove('rotate');
+    
+  });
+</script>
